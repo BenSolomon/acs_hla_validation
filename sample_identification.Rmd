@@ -1,0 +1,34 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+df <- read_tsv("/Users/solomonb/Downloads/hla.txt", col_names = F) %>% 
+  mutate(X1 = gsub("\\-","_",X1)) %>% 
+  arrange(X1)
+df
+```
+
+```{r}
+write_tsv(df[,"X1"],"/Users/solomonb/Downloads/hla_patientIDs.txt",col_names = F )
+```
+
+```{r}
+df %>% arrange(X1)
+```
+
+```{r}
+df_rna <- read_tsv("/Users/solomonb/Downloads/rna.txt", col_names = F)
+df_rna
+```
+
+```{r}
+intersect(df$X1, df_rna$X1)
+```
+
+
